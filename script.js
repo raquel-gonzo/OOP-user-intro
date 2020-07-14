@@ -1,4 +1,23 @@
 
+
+class User {
+    constructor(fullName) {
+        this.name = fullName
+        this.account = new BankAccount();        
+    }
+    makeDeposit(amount){
+        this.account.deposit(amount);
+    }
+
+    makeWithdrawal(amount){
+        this.account.withdraw(amount);
+    }
+    transferMoney(recipient, amount) {
+        this.account.withdraw(amount)
+        recipient.makeDeposit(amount)
+    }
+}
+
 class BankAccount {
     constructor(intRate = 0.01, balance = 0){
         this.balance = balance
@@ -29,9 +48,8 @@ class BankAccount {
     }
 }
 
-const firstAcct = new BankAccount();
-const secondAcct = new BankAccount();
-
-firstAcct.deposit(1).deposit(1).deposit(1).withdraw(1).displayAccountInfo().yieldInterest()
-
-secondAcct.deposit(5).deposit(5).withdraw(1).withdraw(1).withdraw(1).withdraw(1).yieldInterest().displayAccountInfo()
+const rachel = new User("Rachel");
+console.log(rachel.account.balance)
+rachel.account.deposit(200)
+console.log(rachel.account.yieldInterest())
+console.log(rachel.account.displayAccountInfo())
